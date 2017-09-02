@@ -3,6 +3,7 @@ import json
 import logging
 from logging.handlers import RotatingFileHandler
 from configparser import SafeConfigParser
+from ssh_gui import *
 
 
 config = SafeConfigParser()
@@ -29,11 +30,18 @@ logger.addHandler(logHandler)
 
 
 
+
+root = Tk()
+ssh_window = SshWindow(root)
+root.mainloop()
+
+
+
 # ------ from UI
 selectedConn = 0
 selectedComm = 0
 
-
+'''
 host, username, password = connectionList[selectedConn]
 command = commandList[selectedComm]
 
@@ -73,3 +81,5 @@ stdin.close()
 stderr.close()
 stdout.close()
 ssh.close()
+'''
+
