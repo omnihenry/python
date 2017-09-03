@@ -40,7 +40,11 @@ class SshWindow:
     def connectHost(self):
         if self.listBoxHosts.curselection():
             selectedIndex = self.listBoxHosts.curselection()[0]
-            self.resultConnect.set(self.listBoxHosts.get(selectedIndex))
+            host = self.listBoxHosts.get(selectedIndex)
+
+            self.sshConn = SshHandler()
+            self.sshConn.connect(host)
+            del self.sshConn
 
 
 
