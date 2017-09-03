@@ -1,7 +1,8 @@
-from Tkinter import Tk, Label, Listbox, Button, TOP, LEFT, W
+from tkinter import Tk, Label, Listbox, Button, Message, TOP, LEFT, W, NORMAL, DISABLED, StringVar
 
-import json
-from configparser import SafeConfigParser
+from ssh_console import *
+#import json
+#from configparser import SafeConfigParser
 
 
 config = SafeConfigParser()
@@ -27,13 +28,19 @@ class SshWindow:
         self.listBoxHosts.pack()
 
         # Connect button
-        self.btnConnect = Button(master, text='Connect', command=self.connectHost)
+        self.btnConnect = Button(master, text='Connect', state=NORMAL, command=self.connectHost)
         self.btnConnect.pack()
+
+        # Message from connection
+        self.resultConnect = StringVar()
+        self.msgConnect = Message(master, textvariable=self.resultConnect)
+        self.msgConnect.pack()
 
 
     def connectHost(self):
-        selectedIndex = self.listBoxHosts.curselection()[0]
-        print(self.listBoxHosts.get(selectedIndex))
+        if self.listBoxHosts.curselection():
+            selectedIndex = self.listBoxHosts.curselection()[0]
+            self.resultConnect.set(self.listBoxHosts.get(selectedIndex))
 
 
 

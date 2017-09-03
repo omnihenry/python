@@ -3,7 +3,6 @@ import json
 import logging
 from logging.handlers import RotatingFileHandler
 from configparser import SafeConfigParser
-from ssh_gui import *
 
 
 config = SafeConfigParser()
@@ -16,8 +15,8 @@ connectionAttemptMax = int(config.get('Connection', 'connect_attempt_max'))
 commandList = json.loads(config.get('Remote Actions', 'command_list'))
 logFile      = config.get('Logging', 'log_file')
 logLevel     = config.get('Logging', 'log_level')
-logSizeMax   = config.get('Logging', 'log_size_max')
-logRotateMax = config.get('Logging', 'log_rotate_max')
+logSizeMax   = int(config.get('Logging', 'log_size_max'))
+logRotateMax = int(config.get('Logging', 'log_rotate_max'))
 
 #logging.basicConfig(filename=logFile,level=logLevel.upper())
 
@@ -31,24 +30,18 @@ logger.addHandler(logHandler)
 
 
 
-root = Tk()
-ssh_window = SshWindow(root)
-root.mainloop()
-
-
-
 # ------ from UI
-selectedConn = 0
+selectedConn = 1
 selectedComm = 0
 
-'''
+
 host, username, password = connectionList[selectedConn]
 command = commandList[selectedComm]
 
 print(host, username, password)
 print(command)
 
-
+'''
 for i in range(connectionAttemptMax):
     try:
         logger.info('Connecting: %s - attempt #%d', host, i+1)
@@ -73,7 +66,8 @@ err = stderr.read()
 if (err):
     print('-- error --', err)
 else:
-    print(stdout.read())
+    for line in (stdout.readlines()):
+        print(line)
 
 
 # close connections, files
