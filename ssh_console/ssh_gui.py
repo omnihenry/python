@@ -1,12 +1,7 @@
 from tkinter import Tk, Label, Listbox, Button, Message, TOP, LEFT, W, NORMAL, DISABLED, StringVar
-
+import sys
+import time
 from ssh_console import *
-#import json
-#from configparser import SafeConfigParser
-
-
-config = SafeConfigParser()
-config.read('config.ini')
 
 
 class SshWindow:
@@ -20,7 +15,7 @@ class SshWindow:
 
         # Remote host list
         self.listBoxHosts = Listbox(master)
-        connectionList = json.loads(config.get('Remote Hosts', 'connection_list'))
+
         idx = 0
         for host in [conn[0] for conn in connectionList]:
             idx += 1             
@@ -31,10 +26,19 @@ class SshWindow:
         self.btnConnect = Button(master, text='Connect', state=NORMAL, command=self.connectHost)
         self.btnConnect.pack()
 
+        # Disconnect button
+        self.btnDisconnect = Button(master, text='Disconnect', state=DISABLED, command=self.disconnectHost)
+        self.btnDisconnect.pack()
+
         # Message from connection
         self.resultConnect = StringVar()
         self.msgConnect = Message(master, textvariable=self.resultConnect)
         self.msgConnect.pack()
+
+
+        # Exit button
+        self.btnExit = Button(master, text='Close', command=self.closeApp)
+        self.btnExit.pack()
 
 
     def connectHost(self):
@@ -42,14 +46,38 @@ class SshWindow:
             selectedIndex = self.listBoxHosts.curselection()[0]
             host = self.listBoxHosts.get(selectedIndex)
 
-            self.sshConn = SshHandler()
-            self.sshConn.connect(host)
-            del self.sshConn
+            # set widget state
+            self.btnConnect.config(state = DISABLED)
+            self.resultConnect.set('Trying to connect to {}'.format(host))
 
+            # establish connection
+            self.sshConn = SshHandler()
+            (resSuccessful, resMessage) = self.sshConn.connect(host)
+            self.resultConnect.set(resMessage)
+
+            self.btnDisconnect.config(state = NORMAL)
+
+    def disconnectSsh(self):
+        if hasattr(self, 'sshConn'):
+            self.sshConn.disconnect()       
+
+    def disconnectHost(self):
+        self.disconnectSsh()
+
+        # reset widget state
+        self.btnConnect.config(state = NORMAL)
+        self.btnDisconnect.config(state = DISABLED)
+        self.resultConnect.set('')
+            
+
+    def closeApp(self):
+        self.disconnectSsh()
+        self.master.destroy()
 
 
 
 if __name__ == '__main__':
+    logger.info('--- Starting main ---')
     root = Tk()
     ssh_window = SshWindow(root)
     root.mainloop()
