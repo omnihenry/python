@@ -40,6 +40,23 @@ class SshHandler:
         print(resultMessage)
         return (resultSuccessful, resultMessage)
 
+    def executeCmd(self, cmd):
+        resultSuccessful = True
+        resultMessage = ''
+
+        stdin, stdout, stderr = self.ssh.exec_command(cmd)
+
+        err = stderr.read()
+        if (err):
+            resultSuccessful = False
+            resultMessage = err
+        else:
+            resultSuccessful = True
+            resultMessage = stdout.read()
+
+        return (resultSuccessful, resultMessage)
+
+
     def disconnect(self):
         if hasattr(self, 'ssh'):
             self.ssh.close()
