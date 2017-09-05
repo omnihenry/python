@@ -7,14 +7,14 @@ class SSHHandler:
         pass
 
     def connect(self, remote):
-        resultSuccessful = True
-        resultMessage = ''
+        result_successful = True
+        result_message = ''
 
-        for host, username, password in [conn for conn in connectionList]:
+        for host, username, password in [conn for conn in connection_list]:
             if host == remote:
                 break;
 
-        for i in range(connectionAttemptMax):
+        for i in range(connection_attempt_max):
             try:
                 logger.info('Connecting to {} - attempt #{}'.format(host, i+1))
                 self.ssh = paramiko.SSHClient()
@@ -22,47 +22,47 @@ class SSHHandler:
                 self.ssh.connect(host, username=username, password=password)
 
             except paramiko.AuthenticationException:
-                resultMessage = 'Error: Authentication failed when connecting to {}'.format(host)
-                logger.error(resultMessage)
-                resultSuccessful = False            
+                result_message = 'Error: Authentication failed when connecting to {}'.format(host)
+                logger.error(result_message)
+                result_successful = False            
 
             except Exception as e:
-                resultMessage = 'Error: Could not connect to {} - {}'.format(host, e)
-                logger.error(resultMessage)
-                resultSuccessful = False
+                result_message = 'Error: Could not connect to {} - {}'.format(host, e)
+                logger.error(result_message)
+                result_successful = False
 
             else:
-                resultMessage = 'Successfully connected to {}'.format(host)
-                logger.info(resultMessage)
-                resultSuccessful = True
+                result_message = 'Successfully connected to {}'.format(host)
+                logger.info(result_message)
+                result_successful = True
                 break
 
-        print(resultMessage)
-        return (resultSuccessful, resultMessage)
+        print(result_message)
+        return (result_successful, result_message)
 
-    def executeCmd(self, cmd):
-        resultSuccessful = True
-        resultMessage = ''
+    def execute_cmd(self, cmd):
+        result_successful = True
+        result_message = ''
 
         try:
             stdin, stdout, stderr = self.ssh.exec_command(cmd)
         except Exception as e:
-            resultSuccessful = False
-            resultMessage = str(e)
+            result_successful = False
+            result_message = str(e)
         else:
             err = stderr.read()
             if (err):
-                resultSuccessful = False
-                resultMessage = err
+                result_successful = False
+                result_message = err
             else:
-                resultSuccessful = True
-                resultMessage = stdout.read()
+                result_successful = True
+                result_message = stdout.read()
         finally:
             stdin.close()
             stderr.close()
             stdout.close()
 
-        return (resultSuccessful, resultMessage)
+        return (result_successful, result_message)
 
 
     def disconnect(self):
