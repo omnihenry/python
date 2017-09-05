@@ -1,3 +1,8 @@
-2017-09-03 11:55:36,143 - ssh_console - INFO - Connecting: 127.0.0.1 - attempt #2
-2017-09-03 11:55:36,143 - ssh_console - INFO - Connecting: 127.0.0.1 - attempt #2
-2017-09-03 11:55:37,154 - ssh_console - ERROR - Error: Could not connect to 127.0.0.1
+2017-09-04 23:16:40,262 - INFO - Successfully connected to 192.168.0.28
+2017-09-04 23:16:42,747 - INFO - Disconnected
+2017-09-04 23:16:43,594 - INFO - Disconnected
+2017-09-04 23:17:50,559 - INFO - --- Starting main ---
+2017-09-04 23:18:00,931 - INFO - Connecting to 192.168.0.28 - attempt #1
+2017-09-04 23:18:01,325 - INFO - Successfully connected to 192.168.0.28
+2017-09-04 23:18:03,811 - INFO - Disconnected
+2017-09-04 23:18:04,594 - INFO - Disconnected

@@ -38,7 +38,7 @@ theDate = sys.argv[1].replace('-', '_')
 ####################################################
 idStr = ''
 failedIdList = []
-with open('/home/mpl/sv/PCCMessenger/bin/emails.txt', 'r') as f:
+with open('app.log', 'r') as f:
    for line in f:
       if 'Message Id:' in line:
          failedIdList += re.findall('\d+', line)
@@ -52,21 +52,21 @@ print (failedIdList)
  
  
 ####################################################
-# put order files to PCCMessenger/msgs/failed/ dir #
+# put order files to msgs/failed/ dir              #
 ####################################################
  
  
-pccMsgDir = '/home/mpl/sv/PCCMessenger/msgs/'
-failedDir = '/home/mpl/sv/PCCMessenger/msgs/failed/'
-tmpMsgDir = '/home/mpl/sv/PCCMessenger/msgs/tmp/'
-msgProcFile = '/home/mpl/sv/PCCMessenger/bin/messenger.sh'
+msgDir = '/home/msgs/'
+failedDir = '/home/msgs/failed/'
+tmpMsgDir = '/home/msgs/tmp/'
+msgProcFile = '/home/bin/messenger.sh'
  
 # copy msgs of the day (theDate) to tmp dir
 if os.path.isdir(tmpMsgDir):
    shutil.rmtree(tmpMsgDir)
 os.mkdir(tmpMsgDir)
-for node in os.listdir(pccMsgDir):
-   orgDir = os.path.join(pccMsgDir, node)
+for node in os.listdir(msgDir):
+   orgDir = os.path.join(msgDir, node)
    if node != 'failed' and os.path.isdir(orgDir):
       for f in glob.glob(orgDir+'/'+theDate+'*'):
          subDir = os.path.basename(os.path.normpath(f))
@@ -88,23 +88,3 @@ for root, dirs, files in os.walk(tmpMsgDir):
          shutil.copy(os.path.join(root, f), destPath)
          
  
- 
-####################################################
-# process the msgs by calling messenger.sh         #
-####################################################
- 
-# make sure the file is processing the failed dir
-with open(msgProcFile, 'r') as f:
-    data = f.readlines()
- 
-with open('messenger.sh', 'w') as fn:
-   for line in data:
-      if 'WeCmdlPCCMessenger' in line:
-         if '-f' in line:
-            if line.find('java') > 0:  
-               line = line[line.find('java'):]     # uncomment the needed line
-         else:                                       
-            line = '# '+line[line.find('java'):]   # comment the not-needed line
-      fn.write(line)
- 
-#os.system(msgProcFile)

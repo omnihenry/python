@@ -36,10 +36,23 @@ class SshWindow:
         self.msgConnect = Message(master, textvariable=self.resultConnect, width=100)
         self.msgConnect.grid(row=4, columnspan=2, sticky=W)
 
+        # Command list
+        self.scrollbarCmds = Scrollbar(master, orient=VERTICAL)
+        self.scrollbarCmds.grid(row=5, column=2, sticky=NS)
+        self.listBoxCmds = Listbox(master, width=30, height=5, yscrollcommand=self.scrollbarCmds.set)
+        idx = 0
+        for cmd in commandList:
+            idx += 1             
+            self.listBoxCmds.insert(idx, cmd)           
+        self.listBoxCmds.grid(row=5, columnspan=2)
+        self.scrollbarCmds.config(command=self.listBoxCmds.yview)
+
+
+
 
         # Exit button
         self.btnExit = Button(master, text='Close', command=self.closeApp)
-        self.btnExit.grid(row=5, sticky=E)
+        self.btnExit.grid(row=6, sticky=E)
 
 
     def connectHost(self):
@@ -56,7 +69,10 @@ class SshWindow:
             (resSuccessful, resMessage) = self.sshConn.connect(host)
             self.resultConnect.set(resMessage)
 
-            self.btnDisconnect.config(state = NORMAL)
+            if resSuccessful:
+                self.btnDisconnect.config(state = NORMAL)
+            else:
+                self.btnConnect.config(state = NORMAL)
 
     def disconnectSsh(self):
         if hasattr(self, 'sshConn'):
