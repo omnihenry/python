@@ -1,6 +1,4 @@
-from tkinter import Tk, Label, Listbox, Button, Message, TOP, LEFT, W, NORMAL, DISABLED, StringVar
-import sys
-import time
+from tkinter import *
 from ssh_console import *
 
 
@@ -10,35 +8,38 @@ class SshWindow:
         self.master = master
         master.title("Remote Command Exececuter")
 
+        # Top Label
         self.label = Label(master, text="Please select remote host:")
-        self.label.pack(side=TOP)
+        self.label.grid(row=1, columnspan=2)
 
         # Remote host list
-        self.listBoxHosts = Listbox(master)
-
+        self.scrollbarHosts = Scrollbar(master, orient=VERTICAL)
+        self.scrollbarHosts.grid(row=2, column=2, sticky=NS)
+        self.listBoxHosts = Listbox(master, width=30, height=5, yscrollcommand=self.scrollbarHosts.set)
         idx = 0
         for host in [conn[0] for conn in connectionList]:
             idx += 1             
             self.listBoxHosts.insert(idx, host)           
-        self.listBoxHosts.pack()
+        self.listBoxHosts.grid(row=2, columnspan=2)
+        self.scrollbarHosts.config(command=self.listBoxHosts.yview)
 
         # Connect button
         self.btnConnect = Button(master, text='Connect', state=NORMAL, command=self.connectHost)
-        self.btnConnect.pack()
+        self.btnConnect.grid(row=3, column=0)
 
         # Disconnect button
         self.btnDisconnect = Button(master, text='Disconnect', state=DISABLED, command=self.disconnectHost)
-        self.btnDisconnect.pack()
+        self.btnDisconnect.grid(row=3, column=1)
 
         # Message from connection
         self.resultConnect = StringVar()
-        self.msgConnect = Message(master, textvariable=self.resultConnect)
-        self.msgConnect.pack()
+        self.msgConnect = Message(master, textvariable=self.resultConnect, width=100)
+        self.msgConnect.grid(row=4, columnspan=2, sticky=W)
 
 
         # Exit button
         self.btnExit = Button(master, text='Close', command=self.closeApp)
-        self.btnExit.pack()
+        self.btnExit.grid(row=5, sticky=E)
 
 
     def connectHost(self):
