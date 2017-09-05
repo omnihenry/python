@@ -10,11 +10,11 @@ class SSHHandler:
         result_successful = True
         result_message = ''
 
-        for host, username, password in [conn for conn in connection_list]:
+        for host, username, password in [conn for conn in CONNECTION_LIST]:
             if host == remote:
                 break;
 
-        for i in range(connection_attempt_max):
+        for i in range(CONNECTION_ATTEMPT_MAX):
             try:
                 logger.info('Connecting to {} - attempt #{}'.format(host, i+1))
                 self.ssh = paramiko.SSHClient()

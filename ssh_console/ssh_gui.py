@@ -7,28 +7,24 @@ class SSHWindow:
         self.master = master
         master.title("Remote Command Exececuter")
 
-        margin_left  = 20
-        margin_right = 20
-        margin_top   = 20
-
         # Select host Label
         self.label_sel_host = Label(master, text="Please select remote host:")
-        self.label_sel_host.grid(row=1, columnspan=3, sticky=W, padx=(margin_left, 0), pady=(margin_top, 10))
+        self.label_sel_host.grid(row=1, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=(WINDOW_MARGIN_TOP, 10))
 
         # Remote host list
         self.scrollbar_osts = Scrollbar(master, orient=VERTICAL)
-        self.scrollbar_osts.grid(row=2, column=2, padx=(0, margin_right), sticky=NS)
+        self.scrollbar_osts.grid(row=2, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
         self.listbox_hosts = Listbox(master, width=50, height=5, yscrollcommand=self.scrollbar_osts.set)
         idx = 0
-        for host in [conn[0] for conn in connection_list]:
+        for host in [conn[0] for conn in CONNECTION_LIST]:
             idx += 1             
             self.listbox_hosts.insert(idx, host)           
-        self.listbox_hosts.grid(row=2, columnspan=2, padx=(margin_left, 0))
+        self.listbox_hosts.grid(row=2, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
         self.scrollbar_osts.config(command=self.listbox_hosts.yview)
 
         # Connect button
         self.btn_connect = Button(master, text='Connect', state=NORMAL, command=self.connect_host)
-        self.btn_connect.grid(row=3, column=0, padx=(margin_left, 0), sticky=W)
+        self.btn_connect.grid(row=3, column=0, padx=(WINDOW_MARGIN_LEFT, 0), sticky=W)
 
         # Disconnect button
         self.btn_disconnect = Button(master, text='Disconnect', state=DISABLED, command=self.disconnect_host)
@@ -37,32 +33,32 @@ class SSHWindow:
         # Message from connection
         self.result_connect = StringVar()
         self.msg_connect = Message(master, textvariable=self.result_connect, aspect=500)
-        self.msg_connect.grid(row=5, column=0, columnspan=2, padx=(margin_left, 0), sticky=N+S+E+W)
+        self.msg_connect.grid(row=5, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0), sticky=N+S+E+W)
 
         # Select command label
         self.label_sel_cmd = Label(master, text='Please select a command:')
-        self.label_sel_cmd.grid(row=10, columnspan=3, sticky=W, padx=(margin_left, 0), pady=10)
+        self.label_sel_cmd.grid(row=10, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=10)
 
         # Command list
         self.scrollbar_cmds = Scrollbar(master, orient=VERTICAL)
-        self.scrollbar_cmds.grid(row=11, column=2, padx=(0, margin_right), sticky=NS)
+        self.scrollbar_cmds.grid(row=11, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
         self.listbox_cmds = Listbox(master, width=50, height=5, yscrollcommand=self.scrollbar_cmds.set)
         idx = 0
-        for cmd in command_list:
+        for cmd in COMMAND_LIST:
             idx += 1             
             self.listbox_cmds.insert(idx, cmd)           
-        self.listbox_cmds.grid(row=11, columnspan=2, padx=(margin_left, 0))
+        self.listbox_cmds.grid(row=11, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
         self.scrollbar_cmds.config(command=self.listbox_cmds.yview)
 
         # Execute command button
         self.btn_exec = Button(master, text='Execute', state=DISABLED, command=self.execute_cmd)
-        self.btn_exec.grid(row=12, column=0, padx=(margin_left, 0), sticky=W)
+        self.btn_exec.grid(row=12, column=0, padx=(WINDOW_MARGIN_LEFT, 0), sticky=W)
 
         # Message from execution
         self.scrollbar_res = Scrollbar(master, orient=VERTICAL)
-        self.scrollbar_res.grid(row=15, column=2, padx=(0, margin_right), sticky=NS)
+        self.scrollbar_res.grid(row=15, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
         self.msg_exec = Text(master, width=50, height=10, bg='black', borderwidth=3, relief=SUNKEN, yscrollcommand=self.scrollbar_res.set)
-        self.msg_exec.grid(row=15, column=0, columnspan=2, padx=(margin_left, 0), sticky=N+S+E+W)
+        self.msg_exec.grid(row=15, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0), sticky=N+S+E+W)
         self.scrollbar_res.config(command=self.msg_exec.yview)
 
         # Exit button
