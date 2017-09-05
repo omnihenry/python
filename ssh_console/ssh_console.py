@@ -2,7 +2,7 @@ from ssh_globals import *
 import paramiko
 
 
-class SshHandler:
+class SSHHandler:
     def __init__(self):
         pass
 

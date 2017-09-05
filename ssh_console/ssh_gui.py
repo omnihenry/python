@@ -1,8 +1,7 @@
 from tkinter import *
 from ssh_console import *
 
-
-class SshWindow:
+class SSHWindow:
 
     def __init__(self, master):
         self.master = master
@@ -62,7 +61,7 @@ class SshWindow:
         # Message from execution
         self.scrollbarRes = Scrollbar(master, orient=VERTICAL)
         self.scrollbarRes.grid(row=15, column=2, padx=(0, marginRight), sticky=NS)
-        self.msgExec = Text(master, width=50, height=10, bg='grey', yscrollcommand=self.scrollbarRes.set)
+        self.msgExec = Text(master, width=50, height=10, bg='black', borderwidth=3, relief=SUNKEN, yscrollcommand=self.scrollbarRes.set)
         self.msgExec.grid(row=15, column=0, columnspan=2, padx=(marginLeft, 0), sticky=N+S+E+W)
         self.scrollbarRes.config(command=self.msgExec.yview)
 
@@ -84,11 +83,11 @@ class SshWindow:
             self.resultConnect.set('Trying to connect to {}'.format(host))
 
             # establish connection
-            self.sshConn = SshHandler()
+            self.sshConn = SSHHandler()
             (resSuccessful, resMessage) = self.sshConn.connect(host)
 
             if resSuccessful:
-                self.msgConnect.config(foreground = 'green')
+                self.msgConnect.config(foreground = 'lime green')
                 self.btnDisconnect.config(state = NORMAL)
                 self.btnExec.config(state = NORMAL)
             else:
@@ -104,7 +103,7 @@ class SshWindow:
             (resSuccessful, resMessage) = self.sshConn.executeCmd(self.listBoxCmds.get(selectedIndex))
             
             if resSuccessful:
-                self.msgExec.config(foreground = 'blue')
+                self.msgExec.config(foreground = 'white')
             else:
                 self.msgExec.config(foreground = 'red')
 
@@ -112,12 +111,12 @@ class SshWindow:
             self.msgExec.insert(END, resMessage)
 
 
-    def disconnectSsh(self):
+    def disconnectSSH(self):
         if hasattr(self, 'sshConn'):
             self.sshConn.disconnect()       
 
     def disconnectHost(self):
-        self.disconnectSsh()
+        self.disconnectSSH()
 
         # reset widget state
         self.btnConnect.config(state = NORMAL)
@@ -127,14 +126,6 @@ class SshWindow:
             
 
     def closeApp(self):
-        self.disconnectSsh()
+        self.disconnectSSH()
         self.master.destroy()
 
-
-
-if __name__ == '__main__':
-    logger.info('--- Starting main ---')
-    root = Tk()
-    #root.geometry("400x400+0+0")
-    ssh_window = SshWindow(root)
-    root.mainloop()
