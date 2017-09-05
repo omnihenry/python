@@ -44,15 +44,23 @@ class SshHandler:
         resultSuccessful = True
         resultMessage = ''
 
-        stdin, stdout, stderr = self.ssh.exec_command(cmd)
-
-        err = stderr.read()
-        if (err):
+        try:
+            stdin, stdout, stderr = self.ssh.exec_command(cmd)
+        except Exception as e:
             resultSuccessful = False
-            resultMessage = err
+            resultMessage = str(e)
         else:
-            resultSuccessful = True
-            resultMessage = stdout.read()
+            err = stderr.read()
+            if (err):
+                resultSuccessful = False
+                resultMessage = err
+            else:
+                resultSuccessful = True
+                resultMessage = stdout.read()
+        finally:
+            stdin.close()
+            stderr.close()
+            stdout.close()
 
         return (resultSuccessful, resultMessage)
 
@@ -63,54 +71,4 @@ class SshHandler:
         print('Disconnected')
         logger.info('Disconnected')
 
-
-
-'''
-# ------ from UI
-selectedConn = 1
-selectedComm = 0
-
-
-host, username, password = connectionList[selectedConn]
-command = commandList[selectedComm]
-
-print(host, username, password)
-print(command)
-'''
-
-'''
-for i in range(connectionAttemptMax):
-    try:
-        logger.info('Connecting: %s - attempt #%d', host, i+1)
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(host, username=username, password=password)
-        break
-
-    except paramiko.AuthenticationException:
-        print('Error: Authentication failed.')
-        logger.error('Error: Authentication failed.')
-        exit(1)
-
-    except Exception as e:
-        print('Error: Could not connect to ', host)
-        logger.error('Error: Could not connect to %s', host)
-
-
-stdin, stdout, stderr = ssh.exec_command(command)
-
-err = stderr.read()
-if (err):
-    print('-- error --', err)
-else:
-    for line in (stdout.readlines()):
-        print(line)
-
-
-# close connections, files
-stdin.close()
-stderr.close()
-stdout.close()
-ssh.close()
-'''
 
