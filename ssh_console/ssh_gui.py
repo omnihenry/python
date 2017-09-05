@@ -60,9 +60,11 @@ class SshWindow:
         self.btnExec.grid(row=12, column=0, padx=(marginLeft, 0), sticky=W)
 
         # Message from execution
-        self.resultExec = StringVar()
-        self.msgExec = Message(master, textvariable=self.resultExec, aspect=500)
+        self.scrollbarRes = Scrollbar(master, orient=VERTICAL)
+        self.scrollbarRes.grid(row=15, column=2, padx=(0, marginRight), sticky=NS)
+        self.msgExec = Text(master, width=50, height=10, bg='grey', yscrollcommand=self.scrollbarRes.set)
         self.msgExec.grid(row=15, column=0, columnspan=2, padx=(marginLeft, 0), sticky=N+S+E+W)
+        self.scrollbarRes.config(command=self.msgExec.yview)
 
         # Exit button
         self.btnExit = Button(master, text='Close', command=self.closeApp)
@@ -106,7 +108,8 @@ class SshWindow:
             else:
                 self.msgExec.config(foreground = 'red')
 
-            self.resultExec.set(resMessage)
+            self.msgExec.delete(1.0, END)
+            self.msgExec.insert(END, resMessage)
 
 
     def disconnectSsh(self):
