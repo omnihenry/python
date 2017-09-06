@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from ssh_gui import *
 
 if __name__ == '__main__':

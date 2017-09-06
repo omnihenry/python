@@ -1,3 +1,6 @@
+"""
+This module contains the definition of global variables
+"""
 
 import json
 import logging

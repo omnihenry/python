@@ -1,22 +1,33 @@
+#!/usr/bin/python
+
 from ssh_globals import *
 import paramiko
 
 
 class SSHHandler:
+    """Handle SSH connections and remote command executions."""
+
     def __init__(self):
+        """Do nothing here."""
         pass
 
+
     def connect(self, remote):
-        result_successful = True
-        result_message = ''
+        """
+        Connect to remote host 
+      
+        :param remote: remote host ip
+        """
+        result_successful, result_message = True, ''
 
         for host, username, password in [conn for conn in CONNECTION_LIST]:
             if host == remote:
                 break;
 
-        for i in range(CONNECTION_ATTEMPT_MAX):
+        # try to connect for pre-definded number of times
+        for idx in range(CONNECTION_ATTEMPT_MAX):
             try:
-                logger.info('Connecting to {} - attempt #{}'.format(host, i+1))
+                logger.info('Connecting to {} - attempt #{}'.format(host, idx+1))
                 self.ssh = paramiko.SSHClient()
                 self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 self.ssh.connect(host, username=username, password=password)
@@ -37,12 +48,13 @@ class SSHHandler:
                 result_successful = True
                 break
 
-        print(result_message)
         return (result_successful, result_message)
 
+
     def execute_cmd(self, cmd):
-        result_successful = True
-        result_message = ''
+        """Execute command on connected host."""
+        logger.info('Executing command: {}'.format(cmd))
+        result_successful, result_message = True, ''
 
         try:
             stdin, stdout, stderr = self.ssh.exec_command(cmd)
@@ -54,10 +66,13 @@ class SSHHandler:
             if (err):
                 result_successful = False
                 result_message = err
+                logger.info('Failed.')
             else:
                 result_successful = True
                 result_message = stdout.read()
+                logger.info('Successful.')
         finally:
+            # release resources
             stdin.close()
             stderr.close()
             stdout.close()
@@ -66,9 +81,9 @@ class SSHHandler:
 
 
     def disconnect(self):
+        """Disconnect from remote host."""
         if hasattr(self, 'ssh'):
             self.ssh.close()
-        print('Disconnected')
         logger.info('Disconnected')
 
 

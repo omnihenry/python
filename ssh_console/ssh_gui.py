@@ -1,9 +1,17 @@
+#!/usr/bin/python
+
 from tkinter import *
 from ssh_console import *
 
 class SSHWindow:
+    """Show main window and handle operations."""
 
     def __init__(self, master):
+        """
+        Initialize widgets.
+
+        :param master: parent widget
+        """
         self.master = master
         master.title("Remote Command Exececuter")
 
@@ -65,11 +73,11 @@ class SSHWindow:
         self.btn_exit = Button(master, text='Close', command=self.close_app)
         self.btn_exit.grid(row=20, sticky=E)
 
-
-        frame1 = Frame(width=200, height=150).grid()
-
+        logger.info('Main SSH Window initialized.')
+        
 
     def connect_host(self):
+        """Establish connection to selected host."""
         if self.listbox_hosts.curselection():
             selected_index = self.listbox_hosts.curselection()[0]
             host = self.listbox_hosts.get(selected_index)
@@ -94,6 +102,7 @@ class SSHWindow:
 
 
     def execute_cmd(self):
+        """Execute selected command on remote host."""
         if self.listbox_cmds.curselection():
             selected_index = self.listbox_cmds.curselection()[0]
             (res_successful, res_message) = self.ssh_conn.execute_cmd(self.listbox_cmds.get(selected_index))
@@ -108,10 +117,13 @@ class SSHWindow:
 
 
     def disconnect_ssh(self):
+        """Disconnect remote host."""
         if hasattr(self, 'ssh_conn'):
-            self.ssh_conn.disconnect()       
+            self.ssh_conn.disconnect()     
+
 
     def disconnect_host(self):
+        """Disconnect remote host and reset widgets."""
         self.disconnect_ssh()
 
         # reset widget state
@@ -122,6 +134,8 @@ class SSHWindow:
             
 
     def close_app(self):
+        """Shutdown connection and close main window."""
         self.disconnect_ssh()
         self.master.destroy()
+        logger.info('Main SSH Window closed.')
 

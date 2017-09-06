@@ -1,43 +1,28 @@
-<<<<<<< HEAD
-2017-09-04 23:16:40,262 - INFO - Successfully connected to 192.168.0.28
-2017-09-04 23:16:42,747 - INFO - Disconnected
-2017-09-04 23:16:43,594 - INFO - Disconnected
-2017-09-04 23:17:50,559 - INFO - --- Starting main ---
-2017-09-04 23:18:00,931 - INFO - Connecting to 192.168.0.28 - attempt #1
-2017-09-04 23:18:01,325 - INFO - Successfully connected to 192.168.0.28
-2017-09-04 23:18:03,811 - INFO - Disconnected
-2017-09-04 23:18:04,594 - INFO - Disconnected
-2017-09-04 23:29:54,800 - INFO - --- Starting main ---
-2017-09-04 23:30:04,547 - INFO - Connecting to 127.0.0.1 - attempt #1
-2017-09-04 23:30:05,550 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
-2017-09-04 23:30:21,243 - INFO - Connecting to 192.168.0.28 - attempt #1
-2017-09-04 23:30:21,660 - INFO - Successfully connected to 192.168.0.28
-2017-09-04 23:30:23,979 - INFO - Disconnected
-2017-09-04 23:30:43,506 - INFO - Connecting to 127.0.0.1 - attempt #1
-2017-09-04 23:30:44,507 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
-2017-09-04 23:31:23,107 - INFO - Connecting to 127.0.0.1 - attempt #1
-2017-09-04 23:31:24,108 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
-2017-09-04 23:51:02,035 - INFO - Disconnected
-=======
-2017-09-05 19:34:29,898 - INFO - Connecting to 192.168.56.101 - attempt #1
-2017-09-05 19:34:30,281 - INFO - Successfully connected to 192.168.56.101
-2017-09-05 19:34:52,345 - INFO - Disconnected
-2017-09-05 19:34:53,641 - INFO - Disconnected
->>>>>>> 59f2455df9c0f49b30e7255d265da59fb4dcb31a
-2017-09-06 08:53:44,437 - INFO - --- Starting main ---
-2017-09-06 08:53:49,149 - INFO - Connecting to 192.168.0.28 - attempt #1
-2017-09-06 08:53:49,747 - INFO - Successfully connected to 192.168.0.28
-2017-09-06 08:54:13,564 - INFO - Disconnected
-2017-09-06 08:54:25,052 - INFO - Disconnected
-2017-09-06 08:55:27,572 - INFO - --- Starting main ---
-2017-09-06 08:55:30,461 - INFO - Connecting to 192.168.0.28 - attempt #1
-2017-09-06 08:55:30,893 - INFO - Successfully connected to 192.168.0.28
-2017-09-06 08:55:36,028 - INFO - Disconnected
-2017-09-06 08:55:38,381 - INFO - Connecting to 127.0.0.1 - attempt #1
-2017-09-06 08:55:39,383 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
-2017-09-06 08:55:41,860 - INFO - Disconnected
-2017-09-06 08:57:17,990 - INFO - --- Starting main ---
-2017-09-06 08:59:30,813 - INFO - --- Starting main ---
-2017-09-06 09:01:44,253 - INFO - --- Starting main ---
-2017-09-06 09:02:27,308 - INFO - --- Starting main ---
-2017-09-06 09:02:55,331 - INFO - --- Starting main ---
+2017-09-06 17:51:17,012 - INFO - b'no crontab for root\n'
+2017-09-06 17:51:23,758 - INFO - Executing command: pwd
+2017-09-06 17:51:23,839 - INFO - Successfully executed command.
+2017-09-06 17:51:25,906 - INFO - Executing command: wrong command
+2017-09-06 17:51:25,987 - INFO - b'bash: wrong: command not found\n'
+2017-09-06 17:51:28,512 - INFO - Disconnected
+2017-09-06 17:51:32,953 - INFO - Disconnected
+2017-09-06 17:51:32,959 - INFO - Main SSH Window closed.
+2017-09-06 17:59:12,311 - INFO - --- Starting main ---
+2017-09-06 17:59:12,559 - INFO - Main SSH Window initialized.
+2017-09-06 17:59:19,546 - INFO - Connecting to 192.168.56.101 - attempt #1
+2017-09-06 17:59:20,855 - INFO - Successfully connected to 192.168.56.101
+2017-09-06 17:59:22,506 - INFO - Disconnected
+2017-09-06 17:59:24,974 - INFO - Connecting to 127.0.0.1 - attempt #1
+2017-09-06 17:59:24,975 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
+2017-09-06 17:59:28,268 - INFO - Connecting to 192.168.56.101 - attempt #1
+2017-09-06 17:59:28,587 - INFO - Successfully connected to 192.168.56.101
+2017-09-06 17:59:32,013 - INFO - Executing command: uptime
+2017-09-06 17:59:32,124 - INFO - Successful.
+2017-09-06 17:59:37,148 - INFO - Executing command: crontab -l
+2017-09-06 17:59:37,279 - INFO - Failed.
+2017-09-06 17:59:39,420 - INFO - Executing command: wrong command
+2017-09-06 17:59:39,518 - INFO - Failed.
+2017-09-06 17:59:44,753 - INFO - Executing command: ls -ltr /
+2017-09-06 17:59:44,850 - INFO - Successful.
+2017-09-06 17:59:46,679 - INFO - Disconnected
+2017-09-06 17:59:48,273 - INFO - Disconnected
+2017-09-06 17:59:48,280 - INFO - Main SSH Window closed.
