@@ -9,7 +9,7 @@ class SSHWindow:
 
         # Select host Label
         self.label_sel_host = Label(master, text="Please select remote host:")
-        self.label_sel_host.grid(row=1, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=(WINDOW_MARGIN_TOP, 10))
+        self.label_sel_host.grid(row=1, column=0, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=(WINDOW_MARGIN_TOP, 10))
 
         # Remote host list
         self.scrollbar_hosts = Scrollbar(master, orient=VERTICAL)
@@ -19,7 +19,7 @@ class SSHWindow:
         for host in [conn[0] for conn in CONNECTION_LIST]:
             idx += 1             
             self.listbox_hosts.insert(idx, host)           
-        self.listbox_hosts.grid(row=2, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
+        self.listbox_hosts.grid(row=2, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
         self.scrollbar_hosts.config(command=self.listbox_hosts.yview)
 
         # Connect button
@@ -37,7 +37,7 @@ class SSHWindow:
 
         # Select command label
         self.label_sel_cmd = Label(master, text='Please select a command:')
-        self.label_sel_cmd.grid(row=10, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=10)
+        self.label_sel_cmd.grid(row=10, column=0, columnspan=3, sticky=W, padx=(WINDOW_MARGIN_LEFT, 0), pady=10)
 
         # Command list
         self.scrollbar_cmds = Scrollbar(master, orient=VERTICAL)
