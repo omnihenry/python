@@ -6,3 +6,14 @@
 2017-09-04 23:18:01,325 - INFO - Successfully connected to 192.168.0.28
 2017-09-04 23:18:03,811 - INFO - Disconnected
 2017-09-04 23:18:04,594 - INFO - Disconnected
+2017-09-04 23:29:54,800 - INFO - --- Starting main ---
+2017-09-04 23:30:04,547 - INFO - Connecting to 127.0.0.1 - attempt #1
+2017-09-04 23:30:05,550 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
+2017-09-04 23:30:21,243 - INFO - Connecting to 192.168.0.28 - attempt #1
+2017-09-04 23:30:21,660 - INFO - Successfully connected to 192.168.0.28
+2017-09-04 23:30:23,979 - INFO - Disconnected
+2017-09-04 23:30:43,506 - INFO - Connecting to 127.0.0.1 - attempt #1
+2017-09-04 23:30:44,507 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
+2017-09-04 23:31:23,107 - INFO - Connecting to 127.0.0.1 - attempt #1
+2017-09-04 23:31:24,108 - ERROR - Error: Could not connect to 127.0.0.1 - [Errno None] Unable to connect to port 22 on 127.0.0.1
+2017-09-04 23:51:02,035 - INFO - Disconnected
