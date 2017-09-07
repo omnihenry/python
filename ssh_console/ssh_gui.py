@@ -1,4 +1,13 @@
 #!/usr/bin/python
+# title           :ssh_gui.py
+# description     :This script contains the class definition for UI
+# author          :HB
+# date            :20170820
+# version         :0.1
+# usage           :to be imported
+# notes           :
+# python_version  :3.6.2  
+#==============================================================================
 
 from tkinter import *
 from ssh_console import *
@@ -82,14 +91,15 @@ class SSHWindow:
             selected_index = self.listbox_hosts.curselection()[0]
             host = self.listbox_hosts.get(selected_index)
 
-            # set widget state
+            # Set widget state
             self.btn_connect.config(state = DISABLED)
             self.result_connect.set('Trying to connect to {}'.format(host))
 
-            # establish connection
+            # Establish connection
             self.ssh_conn = SSHHandler()
             (res_successful, res_message) = self.ssh_conn.connect(host)
 
+            # Reset state of widgets according to the result
             if res_successful:
                 self.msg_connect.config(foreground = 'lime green')
                 self.btn_disconnect.config(state = NORMAL)
@@ -98,6 +108,7 @@ class SSHWindow:
                 self.msg_connect.config(foreground = 'red')
                 self.btn_connect.config(state = NORMAL)
 
+            # Refresh the Message widget to show the connection result
             self.result_connect.set(res_message)
 
 
@@ -107,11 +118,13 @@ class SSHWindow:
             selected_index = self.listbox_cmds.curselection()[0]
             (res_successful, res_message) = self.ssh_conn.execute_cmd(self.listbox_cmds.get(selected_index))
             
+            # Reset the Message widget state according to the result
             if res_successful:
                 self.msg_exec.config(foreground = 'white')
             else:
                 self.msg_exec.config(foreground = 'red')
 
+            # Refresh Text widget to show the result
             self.msg_exec.delete(1.0, END)
             self.msg_exec.insert(END, res_message)
 

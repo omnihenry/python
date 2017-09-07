@@ -1,4 +1,14 @@
 #!/usr/bin/python
+# title           :ssh_handler.py
+# description     :This script contains the definition of the class 
+#                  that encapsulate the functionalities of remote access
+# author          :HB
+# date            :20170820
+# version         :0.1
+# usage           :to be imported
+# notes           :
+# python_version  :3.6.2  
+#==============================================================================
 
 from ssh_globals import *
 import paramiko
@@ -37,12 +47,12 @@ class SSHHandler:
                 logger.error(result_message)
                 result_successful = False            
 
-            except Exception as e:
+            except Exception as e:                         # Other exceptions
                 result_message = 'Error: Could not connect to {} - {}'.format(host, e)
                 logger.error(result_message)
                 result_successful = False
 
-            else:
+            else:                                          # If it's all good   
                 result_message = 'Successfully connected to {}'.format(host)
                 logger.info(result_message)
                 result_successful = True
@@ -58,10 +68,11 @@ class SSHHandler:
 
         try:
             stdin, stdout, stderr = self.ssh.exec_command(cmd)
-        except Exception as e:
+        except Exception as e:                  # All exceptions
             result_successful = False
             result_message = str(e)
         else:
+            # If command was run, catch the result.
             err = stderr.read()
             if (err):
                 result_successful = False
@@ -72,7 +83,7 @@ class SSHHandler:
                 result_message = stdout.read()
                 logger.info('Successful.')
         finally:
-            # release resources
+            # Release resources before leaving
             stdin.close()
             stderr.close()
             stdout.close()
