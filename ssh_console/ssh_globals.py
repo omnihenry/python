@@ -21,6 +21,7 @@ LOG_SIZE_MAX = int(config.get('Logging', 'LOG_SIZE_MAX'))
 LOG_ROTATE_MAX = int(config.get('Logging', 'LOG_ROTATE_MAX'))
 
 WINDOW_MARGIN_TOP = config.get('User Interface', 'WINDOW_MARGIN_TOP')
+WINDOW_MARGIN_BOTTOM = config.get('User Interface', 'WINDOW_MARGIN_BOTTOM')
 WINDOW_MARGIN_LEFT = config.get('User Interface', 'WINDOW_MARGIN_LEFT')
 WINDOW_MARGIN_RIGHT = config.get('User Interface', 'WINDOW_MARGIN_RIGHT')
 

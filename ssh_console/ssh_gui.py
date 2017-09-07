@@ -22,12 +22,12 @@ class SSHWindow:
         # Remote host list
         self.scrollbar_hosts = Scrollbar(master, orient=VERTICAL)
         self.scrollbar_hosts.grid(row=2, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
-        self.listbox_hosts = Listbox(master, width=50, height=5, yscrollcommand=self.scrollbar_hosts.set)
+        self.listbox_hosts = Listbox(master, width=70, height=5, yscrollcommand=self.scrollbar_hosts.set)
         idx = 0
         for host in [conn[0] for conn in CONNECTION_LIST]:
             idx += 1             
             self.listbox_hosts.insert(idx, host)           
-        self.listbox_hosts.grid(row=2, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
+        self.listbox_hosts.grid(row=2, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0), sticky=N+S+E+W)
         self.scrollbar_hosts.config(command=self.listbox_hosts.yview)
 
         # Connect button
@@ -50,28 +50,28 @@ class SSHWindow:
         # Command list
         self.scrollbar_cmds = Scrollbar(master, orient=VERTICAL)
         self.scrollbar_cmds.grid(row=11, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
-        self.listbox_cmds = Listbox(master, width=50, height=5, yscrollcommand=self.scrollbar_cmds.set)
+        self.listbox_cmds = Listbox(master, width=70, height=5, yscrollcommand=self.scrollbar_cmds.set)
         idx = 0
         for cmd in COMMAND_LIST:
             idx += 1             
             self.listbox_cmds.insert(idx, cmd)           
-        self.listbox_cmds.grid(row=11, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0))
+        self.listbox_cmds.grid(row=11, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0), sticky=N+S+E+W)
         self.scrollbar_cmds.config(command=self.listbox_cmds.yview)
 
         # Execute command button
         self.btn_exec = Button(master, text='Execute', state=DISABLED, command=self.execute_cmd)
-        self.btn_exec.grid(row=12, column=0, padx=(WINDOW_MARGIN_LEFT, 0), sticky=W)
+        self.btn_exec.grid(row=12, column=0, padx=(WINDOW_MARGIN_LEFT, 0), pady=(0, WINDOW_MARGIN_BOTTOM), sticky=W)
 
         # Message from execution
         self.scrollbar_res = Scrollbar(master, orient=VERTICAL)
         self.scrollbar_res.grid(row=15, column=2, padx=(0, WINDOW_MARGIN_RIGHT), sticky=NS)
-        self.msg_exec = Text(master, width=50, height=10, bg='black', borderwidth=3, relief=SUNKEN, yscrollcommand=self.scrollbar_res.set)
+        self.msg_exec = Text(master, width=70, height=10, bg='black', borderwidth=3, relief=SUNKEN, yscrollcommand=self.scrollbar_res.set)
         self.msg_exec.grid(row=15, column=0, columnspan=2, padx=(WINDOW_MARGIN_LEFT, 0), sticky=N+S+E+W)
         self.scrollbar_res.config(command=self.msg_exec.yview)
 
         # Exit button
-        self.btn_exit = Button(master, text='Close', command=self.close_app)
-        self.btn_exit.grid(row=20, sticky=E)
+        self.btn_exit = Button(master, width=10, height=1, text='Close', command=self.close_app)
+        self.btn_exit.grid(row=20, column=1, sticky=E, pady=(WINDOW_MARGIN_TOP, WINDOW_MARGIN_BOTTOM))
 
         logger.info('Main SSH Window initialized.')
         
