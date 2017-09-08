@@ -10,7 +10,7 @@
 #==============================================================================
 
 from tkinter import *
-from ssh_console import *
+from ssh_handler import *
 
 class SSHWindow:
     """Show main window and handle operations."""
