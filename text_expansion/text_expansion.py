@@ -6,7 +6,8 @@
 # author          :Hongbo Wang
 # date            :20170820
 # version         :0.1
-# usage           :python text_expansion.py
+# usage           :to be imported, the testing dictionaries are to be 
+#                  substituted for real data
 # notes           :
 # python_version  : > 3
 #==============================================================================
@@ -15,9 +16,10 @@ def expand_text(string, mapping, loop):
     '''
     Find mapping recursively until the max loop
 
-    :param string: the text that contains the words to expand
+    :param string: the text that contains space-separated words to expand
     :param mapping: the dictionary needed to find out mapping
     :param loop: the maximum rounds of looking up the dictionary
+    :returns: a string that contains the expanded text
     '''
     loop -= 1 
     if loop < 0:
@@ -32,6 +34,11 @@ def expand_text(string, mapping, loop):
     return ' '.join(word_list)
 
 
+######################################################
+#                                                    #  
+# The following dictionaries are for testing purpose #
+#                                                    #
+######################################################
 
 # Case 1
 ABBR_MAPPING = {'aa':'ana', 'ana':'of each', 'agit.':'agita', 'agita':'agitate', 'agitate':'stir or shake', 
@@ -42,4 +49,5 @@ ABBR_MAPPING = {'aa':'ana', 'ana':'of each', 'agit.':'agita', 'agita':'agitate',
 PROMOTION_MAPPING = {'Private':'Corporal', 'Corporal':'Sergeant', 'Sergeant':'Warrant-Officer', 
                      'Warrant-Officer':'Lieutenant', 'Lieutenant':'Captain', 'Captain':'Major', 
                      'Major':'Colonel', 'Colonel':'General'}
+
 
