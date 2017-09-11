@@ -43,4 +43,4 @@ This project is under MIT License.
 <br />
 
 ## Screenshot
-<img src="image/screenshot.jpg"></img>
+<img src="image/screenshot.JPG"></img>
