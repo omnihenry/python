@@ -2,7 +2,7 @@
 # title           :ssh_handler.py
 # description     :This script contains the definition of the class 
 #                  that encapsulate the functionalities of remote access
-# author          :HB
+# author          :Hongbo Wang
 # date            :20170820
 # version         :0.1
 # usage           :to be imported

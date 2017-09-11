@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # title           :main.py
 # description     :This is the main script of the application
-# author          :HB
+# author          :Hongbo Wang
 # date            :20170820
 # version         :0.1
 # usage           :python3 main.py

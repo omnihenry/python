@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # title           :ssh_gui.py
 # description     :This script contains the class definition for UI
-# author          :HB
+# author          :Hongbo Wang
 # date            :20170820
 # version         :0.1
 # usage           :to be imported
