@@ -19,7 +19,11 @@ def expand_text(string, mapping, loop):
     :param string: the text that contains space-separated words to expand
     :param mapping: the dictionary needed to find out mapping
     :param loop: the maximum rounds of looking up the dictionary
+    :type string: str
+    :type mapping: dict
+    :type loop: int
     :returns: a string that contains the expanded text
+    :rtype: str
     '''
     loop -= 1 
     if loop < 0:

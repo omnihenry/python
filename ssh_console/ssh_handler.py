@@ -15,19 +15,22 @@ import paramiko
 
 
 class SSHHandler:
-    """Handle SSH connections and remote command executions."""
+    '''Handle SSH connections and remote command executions.'''
 
     def __init__(self):
-        """Do nothing here."""
+        '''Do nothing here.'''
         pass
 
 
     def connect(self, remote):
-        """
+        '''
         Connect to remote host 
       
         :param remote: remote host ip
-        """
+        :type remote: str
+        :returns: successful or not & message
+        :rtype: tuple of 2 (bool, str)
+        '''
         result_successful, result_message = True, ''
 
         for host, username, password in [conn for conn in CONNECTION_LIST]:
@@ -62,7 +65,14 @@ class SSHHandler:
 
 
     def execute_cmd(self, cmd):
-        """Execute command on connected host."""
+        '''
+        Execute command on connected host.
+
+        :param cmd: the command to run
+        :type cmd: str
+        :returns: successful or not & message
+        :rtype: tuple of 2 (bool, str)
+        '''
         logger.info('Executing command: {}'.format(cmd))
         result_successful, result_message = True, ''
 
@@ -92,7 +102,7 @@ class SSHHandler:
 
 
     def disconnect(self):
-        """Disconnect from remote host."""
+        '''Disconnect from remote host.'''
         if hasattr(self, 'ssh'):
             self.ssh.close()
         logger.info('Disconnected')
