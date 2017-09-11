@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # title           :text_expansion.py
-# description     :This script demonstrates (through 2 examples) the use of 
-#                  a recursive function that expands a given text (to a max
-#                  level) based on the pre-defined mapping 
+# description     :This script contains the definition of a recursive function 
+#                  that expands a given text (to a max level) based on the 
+#                  pre-defined mapping. Two test cases are also provided.
 # author          :Hongbo Wang
 # date            :20170820
 # version         :0.1
@@ -14,6 +14,10 @@
 def expand_text(string, mapping, loop):
     '''
     Find mapping recursively until the max loop
+
+    :param string: the text that contains the words to expand
+    :param mapping: the dictionary needed to find out mapping
+    :param loop: the maximum rounds of looking up the dictionary
     '''
     loop -= 1 
     if loop < 0:
@@ -29,26 +33,13 @@ def expand_text(string, mapping, loop):
 
 
 
-if __name__ == '__main__':
+# Case 1
+ABBR_MAPPING = {'aa':'ana', 'ana':'of each', 'agit.':'agita', 'agita':'agitate', 'agitate':'stir or shake', 
+                'b.d.':'bis indies', 'bis':'twice', 'EOD':'every other day',  'indies':'daily', 
+                'pc':'after meals', 'tab':'tabella', 'tabella':'tablet'}
 
-    MAX_LEVEL = 2       # maximum levels of mapping to search
-
-    # Example 1
-    ABBR_MAPPING = {'aa':'ana', 'ana':'of each', 'agit.':'agita', 'agita':'agitate', 'agitate':'stir or shake', 
-                    'b.d.':'bis indies', 'bis':'twice', 'EOD':'every other day',  'indies':'daily', 
-                    'pc':'after meals', 'tab':'tabella', 'tabella':'tablet'}
-
-    initial_string = '2 tab b.d. pc'
-    res = expand_text(initial_string, ABBR_MAPPING, MAX_LEVEL)
-
-    # Example 2
-    '''    
-    PROMOTION_MAPPING = {'Private':'Corporal', 'Corporal':'Sergeant', 'Sergeant':'Warrant-Officer', 
-                         'Warrant-Officer':'Lieutenant', 'Lieutenant':'Captain', 'Captain':'Major', 
-                         'Major':'Colonel', 'Colonel':'General'}
-
-    initial_string = 'Private Captain Sergeant'
-    res = expand_text(initial_string, PROMOTION_MAPPING, MAX_LEVEL)
-    '''
-    print(res)
+# Case 2
+PROMOTION_MAPPING = {'Private':'Corporal', 'Corporal':'Sergeant', 'Sergeant':'Warrant-Officer', 
+                     'Warrant-Officer':'Lieutenant', 'Lieutenant':'Captain', 'Captain':'Major', 
+                     'Major':'Colonel', 'Colonel':'General'}
 
