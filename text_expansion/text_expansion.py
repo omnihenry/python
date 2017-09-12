@@ -9,7 +9,7 @@
 # usage           :to be imported, the testing dictionaries are to be 
 #                  substituted for real data
 # notes           :
-# python_version  : > 3
+# python_version  : 2.7.10 and above
 #==============================================================================
 
 def expand_text(string, mapping, loop):
